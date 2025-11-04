@@ -1,0 +1,6 @@
+CREATE TABLE patients (
+    id UUID PRIMARY KEY,
+    name VARCHAR(120) NOT NULL,
+    cpf VARCHAR(11) NOT NULL UNIQUE,
+    active BOOLEAN NOT NULL
+);
