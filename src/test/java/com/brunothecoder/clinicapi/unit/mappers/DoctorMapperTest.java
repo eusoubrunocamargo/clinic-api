@@ -20,12 +20,14 @@ public class DoctorMapperTest {
     void shouldConvertToEntity(){
         CreateDoctorRequest request = new CreateDoctorRequest(
                 "Dr. Mapper",
-                Specialty.DERMATOLOGY
+                Specialty.DERMATOLOGY,
+                "15000"
         );
         Doctor doctor = mapper.toEntity(request);
 
         assertEquals("Dr. Mapper", doctor.getName());
         assertEquals(Specialty.DERMATOLOGY, doctor.getSpecialty());
+        assertEquals("15000", doctor.getCrm());
     }
 
     @Test

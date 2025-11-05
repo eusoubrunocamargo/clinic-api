@@ -12,6 +12,7 @@ public class DoctorMapper {
         Doctor doctor = new Doctor();
         doctor.setName(request.name());
         doctor.setSpecialty(request.specialty());
+        doctor.setCrm(request.crm());
         return doctor;
     }
 
@@ -20,6 +21,7 @@ public class DoctorMapper {
                 doctor.getId().toString(),
                 doctor.getName(),
                 doctor.getSpecialty(),
+                doctor.getCrm(),
                 doctor.isActive()
         );
     }

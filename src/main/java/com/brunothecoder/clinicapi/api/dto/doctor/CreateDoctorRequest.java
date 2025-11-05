@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record CreateDoctorRequest (
     @NotBlank String name,
-    @NotNull @Enumerated
-    Specialty specialty
+    @NotNull @Enumerated Specialty specialty,
+    @NotBlank String crm
 ){}
 

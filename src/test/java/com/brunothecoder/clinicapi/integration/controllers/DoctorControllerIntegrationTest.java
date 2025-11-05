@@ -42,7 +42,8 @@ public class DoctorControllerIntegrationTest {
 
         CreateDoctorRequest request = new CreateDoctorRequest(
                 "Dr. Controller",
-                Specialty.CARDIOLOGY
+                Specialty.CARDIOLOGY,
+                "15000"
         );
 
         mockMvc.perform(post("/v1/doctors").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(request)))
@@ -50,6 +51,7 @@ public class DoctorControllerIntegrationTest {
                 .andExpect(header().exists("Location"))
                 .andExpect(jsonPath("$.name").value("Dr. Controller"))
                 .andExpect(jsonPath("$.specialty").value("CARDIOLOGY"))
+                .andExpect(jsonPath("$.crm").value("15000"))
                 .andExpect(jsonPath("$.active").value(true));
 
 

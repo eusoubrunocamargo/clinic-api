@@ -29,4 +29,8 @@ public class Doctor {
 
     @Column(nullable = false)
     private boolean active = true;
+
+    @Column(nullable = false, length = 10)
+    public String crm;
+
 }

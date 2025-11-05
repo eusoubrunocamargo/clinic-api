@@ -6,6 +6,7 @@ public record DoctorResponse(
         String id,
         String name,
         Specialty specialty,
+        String crm,
         boolean active
 ) {
 }

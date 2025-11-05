@@ -1,5 +1,6 @@
 package com.brunothecoder.clinicapi.api.exceptions;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -37,6 +38,15 @@ public class ApiExceptionHandler {
         problem.setDetail(ex.getMessage());
         problem.setType(URI.create("https://clinic.com/errors/business"));
         problem.setInstance(URI.create(req.getRequestURI()));
+        return problem;
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ProblemDetail handleEntityNotFound (EntityNotFoundException ex, HttpServletRequest req) {
+        ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+        problem.setTitle("Entity not found");
+        problem.setDetail(ex.getMessage());
+        problem.setType(URI.create("https://clinic.com/errors/not-found"));
         return problem;
     }
 
