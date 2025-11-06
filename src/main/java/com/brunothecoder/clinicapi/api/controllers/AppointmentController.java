@@ -52,27 +52,20 @@ public class AppointmentController {
 
     @PostMapping
     public ResponseEntity<AppointmentResponse> create (@Valid @RequestBody CreateAppointmentRequest req) {
-
-        Patient patient = patientRepository
-                .findById(req.patientId())
-                .orElseThrow(() -> new EntityNotFoundException(ErrorMessages.PATIENT_NOT_FOUND));
-
-        Doctor doctor = doctorRepository
-                .findById(req.doctorId())
-                .orElseThrow(() -> new EntityNotFoundException(ErrorMessages.DOCTOR_NOT_FOUND));
-
-        Appointment appointment = mapper.toEntity(req, patient, doctor);
-
-        Appointment saved = service.create(appointment);
-
+        Appointment saved = service.create(req);
         return ResponseEntity.created(URI.create("/v1/appointments" + saved.getId()))
                 .body(mapper.toResponse(saved));
     }
 
     @PatchMapping("/{id}/cancel")
     public ResponseEntity<AppointmentResponse> cancel (@PathVariable(value = "id") UUID id) {
-        System.out.println("Cancelling...");
         Appointment cancelled = service.cancel(id);
         return ResponseEntity.ok(mapper.toResponse(cancelled));
+    }
+
+    @PatchMapping("/{id}/start")
+    public ResponseEntity<AppointmentResponse> start (@PathVariable(value = "id") UUID id) {
+        Appointment started = service.start(id);
+        return ResponseEntity.ok(mapper.toResponse(started));
     }
 }
